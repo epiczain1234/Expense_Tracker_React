@@ -1,9 +1,13 @@
-import './ExpenseItem.css'
-import CalendarItem from './CalenderItem'
+import './ExpenseItem.css';
+import React, {useState} from 'react';
+import CalendarItem from './CalenderItem';
 import Card from './Card';
 function ExpenseItem(props){
-    const title = props.title;
     const price = props.amount;
+    const [title, setTitle] = useState(props.title);
+    const changeName = () => {
+        setTitle('Yeah');
+    };
     return (
         <Card className="expense-item">
             <div>
@@ -13,6 +17,7 @@ function ExpenseItem(props){
                <h2>{title}</h2> 
                <div className="expense-item__price">${price}</div>
             </div>
+            <button onClick={changeName}>Press if my girlfriend is chubby </button>
         </Card>
     )
 }
