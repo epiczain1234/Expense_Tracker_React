@@ -1,10 +1,11 @@
 import './ExpenseForm.css';
 import React, {useState} from 'react';
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     // intial state can be represented by an empty string
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
+    const saveExpenseDataHandler = props.onSaveExpenseData;
     const submitHandler = (event) => {
         event.preventDefault();
 
@@ -12,9 +13,8 @@ const ExpenseForm = () => {
             title: enteredTitle,
             amount: enteredAmount,
             date : new Date(enteredDate)
-
         };
-        console.log(expenseData);
+        saveExpenseDataHandler(expenseData);
         setEnteredAmount('');
         setEnteredDate('');
         setEnteredTitle('');
@@ -33,9 +33,7 @@ const ExpenseForm = () => {
         //     ...userInput,
         //     enteredTitle: event.target.value
         // })
-        setEnteredTitle((prevState) =>{
-            return {...prevState, enteredTitle:event.target.value}
-        })
+        setEnteredTitle(event.target.value);
     }
     // get triggered when amount is chaned on page
     const amountChangeHandler = (event) => {
@@ -43,18 +41,14 @@ const ExpenseForm = () => {
         //     ...userInput,
         //     enteredAmount: event.target.value
         // })
-        setEnteredAmount((prevState) =>{
-            return {...prevState, enteredAmount:event.target.value}
-        })
+        setEnteredAmount(event.target.value);
     }
     const dateChangeHandler = (event) => {
         // setUserInput({
         //     ...userInput, // copies over previous data to the new state, overrides previous entered date value
         //     enteredDate: event.target.value
         // })
-        setEnteredDate((prevState) =>{
-            return {...prevState, enteredDate:event.target.value}
-        })
+        setEnteredDate(event.target.value);
     }
 
     return (
